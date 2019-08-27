@@ -40,9 +40,9 @@
 #include "hex.h"
 #include "span.h"
 
-#define CN_ARQMA_PAGE_SIZE 1048576
-#define CN_ARQMA_SCRATCHPAD 1048576
-#define CN_ARQMA_ITERATIONS 524288
+#define CN_OSCILLATE_PAGE_SIZE 1048576
+#define CN_OSCILLATE_SCRATCHPAD 1048576
+#define CN_OSCILLATE_ITERATIONS 524288
 
 #define CN_TURTLE_PAGE_SIZE 262144
 #define CN_TURTLE_SCRATCHPAD 262144
@@ -77,12 +77,12 @@ namespace crypto {
     return h;
   }
 
-  inline void cn_arqma_hash_v0(const void *data, size_t length, hash &hash) {
-    cn_slow_hash(data, length, reinterpret_cast<char *>(&hash), 0, 0, 0, CN_ARQMA_PAGE_SIZE, CN_ARQMA_SCRATCHPAD, CN_ARQMA_ITERATIONS);
+  inline void cn_oscillate_hash_v0(const void *data, size_t length, hash &hash) {
+    cn_slow_hash(data, length, reinterpret_cast<char *>(&hash), 0, 0, 0, CN_OSCILLATE_PAGE_SIZE, CN_OSCILLATE_SCRATCHPAD, CN_OSCILLATE_ITERATIONS);
   }
 
-  inline void cn_arqma_hash_v1(const void *data, size_t length, hash &hash) {
-    cn_slow_hash(data, length, reinterpret_cast<char *>(&hash), 0, 1, 0, CN_ARQMA_PAGE_SIZE, CN_ARQMA_SCRATCHPAD, CN_ARQMA_ITERATIONS);
+  inline void cn_oscillate_hash_v1(const void *data, size_t length, hash &hash) {
+    cn_slow_hash(data, length, reinterpret_cast<char *>(&hash), 0, 1, 0, CN_OSCILLATE_PAGE_SIZE, CN_OSCILLATE_SCRATCHPAD, CN_OSCILLATE_ITERATIONS);
   }
 
   inline void cn_turtle_hash(const void *data, size_t length, hash &hash) {

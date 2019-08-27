@@ -38,13 +38,13 @@ if (WIN32 OR STATIC)
   add_definitions(-D__STDC_FORMAT_MACROS)
 endif ()
 
-function (arqma_private_headers group)
+function (oscillate_private_headers group)
   source_group("${group}\\Private"
     FILES
       ${ARGN})
 endfunction ()
 
-function (arqma_install_headers subdir)
+function (oscillate_install_headers subdir)
   install(
     FILES       ${ARGN}
     DESTINATION "include/${subdir}"
@@ -62,7 +62,7 @@ function (enable_stack_trace target)
   endif()
 endfunction()
 
-function (arqma_add_executable name)
+function (oscillate_add_executable name)
   source_group("${name}"
     FILES
       ${ARGN})
@@ -81,31 +81,31 @@ function (arqma_add_executable name)
   enable_stack_trace("${name}")
 endfunction ()
 
-function (arqma_add_library name)
-    arqma_add_library_with_deps(NAME "${name}" SOURCES ${ARGN})
+function (oscillate_add_library name)
+    oscillate_add_library_with_deps(NAME "${name}" SOURCES ${ARGN})
 endfunction()
 
-function (arqma_add_library_with_deps)
-  cmake_parse_arguments(ARQMA_ADD_LIBRARY "" "NAME" "DEPENDS;SOURCES" ${ARGN})
-  source_group("${ARQMA_ADD_LIBRARY_NAME}" FILES ${ARQMA_ADD_LIBRARY_SOURCES})
+function (oscillate_add_library_with_deps)
+  cmake_parse_arguments(OSCILLATE_ADD_LIBRARY "" "NAME" "DEPENDS;SOURCES" ${ARGN})
+  source_group("${OSCILLATE_ADD_LIBRARY_NAME}" FILES ${OSCILLATE_ADD_LIBRARY_SOURCES})
 
   # Define a ("virtual") object library and an actual library that links those
   # objects together. The virtual libraries can be arbitrarily combined to link
   # any subset of objects into one library archive. This is used for releasing
   # libwallet, which combines multiple components.
-  set(objlib obj_${ARQMA_ADD_LIBRARY_NAME})
-  add_library(${objlib} OBJECT ${ARQMA_ADD_LIBRARY_SOURCES})
-  add_library("${ARQMA_ADD_LIBRARY_NAME}" $<TARGET_OBJECTS:${objlib}>)
-  if (ARQMA_ADD_LIBRARY_DEPENDS)
-    add_dependencies(${objlib} ${ARQMA_ADD_LIBRARY_DEPENDS})
+  set(objlib obj_${OSCILLATE_ADD_LIBRARY_NAME})
+  add_library(${objlib} OBJECT ${OSCILLATE_ADD_LIBRARY_SOURCES})
+  add_library("${OSCILLATE_ADD_LIBRARY_NAME}" $<TARGET_OBJECTS:${objlib}>)
+  if (OSCILLATE_ADD_LIBRARY_DEPENDS)
+    add_dependencies(${objlib} ${OSCILLATE_ADD_LIBRARY_DEPENDS})
   endif()
-  set_property(TARGET "${ARQMA_ADD_LIBRARY_NAME}" PROPERTY FOLDER "libs")
+  set_property(TARGET "${OSCILLATE_ADD_LIBRARY_NAME}" PROPERTY FOLDER "libs")
   target_compile_definitions(${objlib}
-    PRIVATE $<TARGET_PROPERTY:${ARQMA_ADD_LIBRARY_NAME},INTERFACE_COMPILE_DEFINITIONS>)
+    PRIVATE $<TARGET_PROPERTY:${OSCILLATE_ADD_LIBRARY_NAME},INTERFACE_COMPILE_DEFINITIONS>)
 endfunction ()
 
 include(Version)
-arqma_add_library(version SOURCES ${CMAKE_BINARY_DIR}/version.cpp DEPENDS genversion)
+oscillate_add_library(version SOURCES ${CMAKE_BINARY_DIR}/version.cpp DEPENDS genversion)
 
 add_subdirectory(common)
 add_subdirectory(crypto)

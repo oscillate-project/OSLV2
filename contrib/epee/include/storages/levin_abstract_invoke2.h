@@ -31,8 +31,8 @@
 #include "span.h"
 #include "net/levin_base.h"
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "net"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "net"
 
 namespace epee
 {

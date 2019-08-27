@@ -57,8 +57,8 @@ using namespace epee;
 #include "p2p/net_node.h"
 #include "version.h"
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "daemon.rpc"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "daemon.rpc"
 
 #define MAX_RESTRICTED_FAKE_OUTS_COUNT 40
 #define MAX_RESTRICTED_GLOBAL_FAKE_OUTS_COUNT 5000
@@ -2163,7 +2163,7 @@ namespace cryptonote
       return r;
 
     res.version = CORE_RPC_VERSION;
-    res.release = ARQMA_VERSION_IS_RELEASE;
+    res.release = OSCILLATE_VERSION_IS_RELEASE;
     res.status = CORE_RPC_STATUS_OK;
     return true;
   }
@@ -2322,7 +2322,7 @@ namespace cryptonote
   bool core_rpc_server::on_update(const COMMAND_RPC_UPDATE::request& req, COMMAND_RPC_UPDATE::response& res, const connection_context *ctx)
   {
     RPC_TRACKER(update);
-    static const char software[] = "arqma";
+    static const char software[] = "oscillate";
 #ifdef BUILD_TAG
     static const char buildtag[] = BOOST_PP_STRINGIZE(BUILD_TAG);
 //    static const char subdir[] = "cli";
@@ -2343,7 +2343,7 @@ namespace cryptonote
       res.status = "Error checking for updates";
       return true;
     }
-    if (tools::vercmp(version.c_str(), ARQMA_VERSION) <= 0)
+    if (tools::vercmp(version.c_str(), OSCILLATE_VERSION) <= 0)
     {
       res.update = false;
       res.status = CORE_RPC_STATUS_OK;

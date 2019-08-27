@@ -45,8 +45,8 @@
 #include "blockchain_db/db_types.h"
 #include "cryptonote_core/cryptonote_core.h"
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "bcutil"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "bcutil"
 
 namespace
 {
@@ -644,7 +644,7 @@ int main(int argc, char* argv[])
 
   if (command_line::get_arg(vm, command_line::arg_help))
   {
-    std::cout << "ArQmA '" << ARQMA_RELEASE_NAME << "' (v" << ARQMA_VERSION_FULL << ")" << ENDL << ENDL;
+    std::cout << "Oscillate '" << OSCILLATE_RELEASE_NAME << "' (v" << OSCILLATE_VERSION_FULL << ")" << ENDL << ENDL;
     std::cout << desc_options << std::endl;
     return 1;
   }
@@ -682,7 +682,7 @@ int main(int argc, char* argv[])
   m_config_folder = command_line::get_arg(vm, cryptonote::arg_data_dir);
   db_arg_str = command_line::get_arg(vm, arg_database);
 
-  mlog_configure(mlog_get_default_log_path("arqma-blockchain-import.log"), true);
+  mlog_configure(mlog_get_default_log_path("oscillate-blockchain-import.log"), true);
   if (!command_line::is_arg_defaulted(vm, arg_log_level))
     mlog_set_log(command_line::get_arg(vm, arg_log_level).c_str());
   else

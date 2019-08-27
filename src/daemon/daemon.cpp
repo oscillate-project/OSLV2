@@ -53,8 +53,8 @@ using namespace epee;
 
 #include <functional>
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "daemon"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "daemon"
 
 namespace daemonize {
 

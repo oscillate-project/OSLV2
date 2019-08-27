@@ -146,7 +146,7 @@
 
 #define ALLOW_DEBUG_COMMANDS
 
-#define CRYPTONOTE_NAME                                 "arqma"
+#define CRYPTONOTE_NAME                                 "oscillate"
 #define CRYPTONOTE_POOLDATA_FILENAME                    "poolstate.bin"
 #define CRYPTONOTE_BLOCKCHAINDATA_FILENAME              "data.mdb"
 #define CRYPTONOTE_BLOCKCHAINDATA_LOCK_FILENAME         "lock.mdb"
@@ -197,12 +197,12 @@ namespace config
    uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0x2cca; // Wallet prefix: ar... // decimal prefix: 11466
    uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x116bc7; // Wallet prefix: aRi... // decimal prefix: 1141703
    uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0x6847; // Wallet prefix: aRS... // decimal prefix: 26695
-   uint16_t const P2P_DEFAULT_PORT = 19993;
-   uint16_t const RPC_DEFAULT_PORT = 19994;
-   uint16_t const ZMQ_RPC_DEFAULT_PORT = 19995;
+   uint16_t const P2P_DEFAULT_PORT = 11245;
+   uint16_t const RPC_DEFAULT_PORT = 11246;
+   uint16_t const ZMQ_RPC_DEFAULT_PORT = 11115;
    boost::uuids::uuid const NETWORK_ID = { {
-       0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1A
-     } }; // Bender's nightmare
+       0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1A, 0xFF, 0xFF, 0xFF, 0x11
+     } }; // 
    std::string const GENESIS_TX = "011201ff00011e026bc5c7db8a664f652d78adb587ac4d759c6757258b64ef9cba3c0354e64fb2e42101abca6a39c561d0897be183eb0143990eba201aa7d2c652ab0555d28bb4b70728";
    uint32_t const GENESIS_NONCE = 19993;
 
@@ -211,12 +211,12 @@ namespace config
      uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0x53ca; // Wallet prefix: at... // decimal prefix: 21450
      uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x504a; // Wallet prefix: ati... // decimal prefix: 20554
      uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0x524a; // Wallet prefix: ats... // decimal prefix: 21066
-     uint16_t const P2P_DEFAULT_PORT = 29993;
-     uint16_t const RPC_DEFAULT_PORT = 29994;
-     uint16_t const ZMQ_RPC_DEFAULT_PORT = 29995;
+     uint16_t const P2P_DEFAULT_PORT = 21245;
+     uint16_t const RPC_DEFAULT_PORT = 21246;
+     uint16_t const ZMQ_RPC_DEFAULT_PORT = 22225;
      boost::uuids::uuid const NETWORK_ID = { {
-         0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1B
-       } }; // Bender's daydream
+         0x11, 0x11, 0x11, 0x11, 0xFF, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1B, 0xFF, 0xFF, 0x11, 0x11
+       } }; // 
    }
 
    namespace stagenet
@@ -224,12 +224,12 @@ namespace config
      uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0x39ca; // Wallet prefix: as... // decimal prefix: 14794
      uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x1742ca; // Wallet prefix: asi... // decimal prefix: 1524426
      uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0x1d84ca; // Wallet prefix: ass... // decimal prefix: 1934538
-     uint16_t const P2P_DEFAULT_PORT = 39993;
-     uint16_t const RPC_DEFAULT_PORT = 39994;
-     uint16_t const ZMQ_RPC_DEFAULT_PORT = 39995;
+     uint16_t const P2P_DEFAULT_PORT = 31245;
+     uint16_t const RPC_DEFAULT_PORT = 31246;
+     uint16_t const ZMQ_RPC_DEFAULT_PORT = 33335;
      boost::uuids::uuid const NETWORK_ID = { {
-         0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1C
-       } }; // Bender's daydream
+         0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1C, 0x11, 0xFF, 0xFF, 0xFF
+       } }; // 
    }
 
    namespace blockchain_settings
@@ -237,14 +237,14 @@ namespace config
      static constexpr uint64_t PREMINE_BURN = 5100000000000000; // Will need to be set after knowing exact amount.
      static constexpr uint64_t MAXIMUM_BLOCK_SIZE_LIMIT = 2 * 1024 * 1024; // It is set to 2048kB (2MB)
      static constexpr uint64_t MINIMUM_BLOCK_SIZE_LIMIT = 1 * 1024 * 1024; // It is set to 1024kB (1MB)
-     static constexpr uint8_t ARQMA_GENESIS_BLOCK_MAJOR_VERSION = 1;
-     static constexpr uint8_t ARQMA_GENESIS_BLOCK_MINOR_VERSION = 1;
-     static constexpr uint8_t ARQMA_BLOCK_UNLOCK_CONFIRMATIONS = 18; // How many blocks mined are needed to unlock block_reward.
+     static constexpr uint8_t OSCILLATE_GENESIS_BLOCK_MAJOR_VERSION = 1;
+     static constexpr uint8_t OSCILLATE_GENESIS_BLOCK_MINOR_VERSION = 1;
+     static constexpr uint8_t OSCILLATE_BLOCK_UNLOCK_CONFIRMATIONS = 18; // How many blocks mined are needed to unlock block_reward.
    }
 
    namespace tx_settings
    {
-     static constexpr uint8_t ARQMA_TX_CONFIRMATIONS_REQUIRED = 4; // How many blocks are needed to confirm transaction sent.
+     static constexpr uint8_t OSCILLATE_TX_CONFIRMATIONS_REQUIRED = 4; // How many blocks are needed to confirm transaction sent.
      static constexpr uint8_t CURRENT_TX_VERSION = 2; // Current Transaction Version Valid on Arq-Net
      static constexpr uint64_t TRANSACTION_SIZE_LIMIT = 48 * 1024; // I did set it to 48kB for now but it need to be verified.
      static constexpr uint64_t MAX_TRANSACTIONS_IN_BLOCK = 1024; // Maximum allowed transactions in One Block
@@ -253,7 +253,7 @@ namespace config
    namespace sync
    {
      static constexpr size_t NORMAL_SYNC = 20; // Amount of Blocks to download and Validate at ones while Synchronizung with Arqma Network.
-     static constexpr size_t RAPID_SYNC = 250; // Amount of Blocks to download at ones from already known by Arqma Daemon and Checkpoint are hardcoded into codebase
+     static constexpr size_t RAPID_SYNC = 250; // Amount of Blocks to download at ones from already known by Oscillate Daemon and Checkpoint are hardcoded into codebase
    }
 }
 

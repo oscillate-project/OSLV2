@@ -57,8 +57,8 @@
 #include "common/varint.h"
 #include "common/pruning.h"
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "blockchain"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "blockchain"
 
 #define FIND_BLOCKCHAIN_SUPPLEMENT_MAX_SIZE (100*1024*1024) // 100 MB
 
@@ -92,12 +92,12 @@ static const struct {
  { 1, 0, 0, 1341378000 },
  { 7, 1, 0, 1528750800 },
  { 8, 100, 0, 1528751200 },
- { 9, 7000, 0, 1530320400 },
- { 10, 61250, 0, 1543615200 },
- { 11, 131650, 0, 1552424400 },
- { 12, 183700, 0, 1558656000 },
- { 13, 248200, 0, 1566511680 },
- { 14, 248920, 0, 1566598080 }
+ { 9, 110, 0, 1530320400 },
+ { 10, 120, 0, 1543615200 },
+ { 11, 130, 0, 1552424400 },
+ { 12, 140, 0, 1558656000 },
+ { 13, 150, 0, 1566511680 },
+ { 14, 160, 0, 1566598080 }
 };
 static const uint64_t mainnet_hard_fork_version_1_till = 1;
 
@@ -612,7 +612,7 @@ block Blockchain::pop_block_from_blockchain()
   block popped_block;
   std::vector<transaction> popped_txs;
 
-  CHECK_AND_ASSERT_THROW_MES(m_db->height() > 1, "It is forbidden to remove ArQmA Genesis Block.");
+  CHECK_AND_ASSERT_THROW_MES(m_db->height() > 1, "It is forbidden to remove Oscillate Genesis Block.");
 
   try
   {
@@ -1246,7 +1246,7 @@ bool Blockchain::prevalidate_miner_transaction(const block& b, uint64_t height)
     return false;
   }
   MDEBUG("Miner tx hash: " << get_transaction_hash(b.miner_tx));
-  CHECK_AND_ASSERT_MES(b.miner_tx.unlock_time == height + config::blockchain_settings::ARQMA_BLOCK_UNLOCK_CONFIRMATIONS, false, "coinbase transaction transaction has the wrong unlock time=" << b.miner_tx.unlock_time << ", expected " << height + config::blockchain_settings::ARQMA_BLOCK_UNLOCK_CONFIRMATIONS);
+  CHECK_AND_ASSERT_MES(b.miner_tx.unlock_time == height + config::blockchain_settings::OSCILLATE_BLOCK_UNLOCK_CONFIRMATIONS, false, "coinbase transaction transaction has the wrong unlock time=" << b.miner_tx.unlock_time << ", expected " << height + config::blockchain_settings::OSCILLATE_BLOCK_UNLOCK_CONFIRMATIONS);
 
   //check outs overflow
   //NOTE: not entirely sure this is necessary, given that this function is
@@ -1944,7 +1944,7 @@ uint64_t Blockchain::get_num_mature_outputs(uint64_t amount) const
   {
     const tx_out_index toi = m_db->get_output_tx_and_index(amount, num_outs - 1);
     const uint64_t height = m_db->get_tx_block_height(toi.first);
-    if (height + config::tx_settings::ARQMA_TX_CONFIRMATIONS_REQUIRED <= blockchain_height)
+    if (height + config::tx_settings::OSCILLATE_TX_CONFIRMATIONS_REQUIRED <= blockchain_height)
       break;
     --num_outs;
   }
@@ -2015,7 +2015,7 @@ void Blockchain::get_output_key_mask_unlocked(const uint64_t& amount, const uint
 bool Blockchain::get_output_distribution(uint64_t amount, uint64_t from_height, uint64_t to_height, uint64_t &start_height, std::vector<uint64_t> &distribution, uint64_t &base) const
 {
   // rct outputs don't exist before v4
-  // Arqma did start from v7 at blockheight 1 so our start is always 0
+  // Oscillate did start from v7 at blockheight 1 so our start is always 0
   
   start_height = 0;
   base = 0;
@@ -3565,7 +3565,7 @@ leave:
     const el::Level level = el::Level::Warning;
     MCLOG_RED(level, "global", "**********************************************************************");
     MCLOG_RED(level, "global", "A block was seen on the network with a version higher than the last");
-    MCLOG_RED(level, "global", "known one. This may be an old version of the Arqma daemon, and a software");
+    MCLOG_RED(level, "global", "known one. This may be an old version of the Oscillate daemon, and a software");
     MCLOG_RED(level, "global", "update may be required to sync further. ");
     MCLOG_RED(level, "global", "**********************************************************************");
   }

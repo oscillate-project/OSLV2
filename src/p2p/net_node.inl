@@ -65,8 +65,8 @@
 #include <miniupnp/miniupnpc/upnpcommands.h>
 #include <miniupnp/miniupnpc/upnperrors.h>
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "net.p2p"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "net.p2p"
 
 #define NET_MAKE_IP(b1,b2,b3,b4)  ((LPARAM)(((DWORD)(b1)<<24)+((DWORD)(b2)<<16)+((DWORD)(b3)<<8)+((DWORD)(b4))))
 
@@ -462,31 +462,19 @@ namespace nodetool
     std::set<std::string> full_addrs;
     if (nettype == cryptonote::TESTNET)
     {
-      full_addrs.insert("139.99.106.122:29993");
-      full_addrs.insert("77.93.206.172:29993");
-      full_addrs.insert("77.103.229.42:29993");
+      
     }
     else if (nettype == cryptonote::STAGENET)
     {
-      full_addrs.insert("77.93.206.172:39993");
-      full_addrs.insert("51.158.65.16:39993");
-      full_addrs.insert("77.103.229.42:39993");
-      full_addrs.insert("139.99.106.122:39993");
-      full_addrs.insert("144.217.242.16:39993");
+  
     }
     else if (nettype == cryptonote::FAKECHAIN)
     {
     }
     else
     {
-      full_addrs.insert("144.217.242.16:19993");
-      full_addrs.insert("207.244.120.39:19993");
-      full_addrs.insert("92.222.70.207:19993");
-      full_addrs.insert("77.103.229.42:19993");
-      full_addrs.insert("77.93.206.170:19993");
-      full_addrs.insert("51.15.50.83:19993");
-      full_addrs.insert("51.158.65.16:19993");
-      full_addrs.insert("51.15.253.177:19993");
+      full_addrs.insert("167.99.54.234:11245");
+      full_addrs.insert("68.183.194.19:11245");
     }
     return full_addrs;
   }
@@ -1729,7 +1717,7 @@ namespace nodetool
     }
     rsp.connections_count = get_connections_count();
     rsp.incoming_connections_count = (rsp.connections_count - get_outgoing_connections_count());
-    rsp.version = ARQMA_VERSION_FULL;
+    rsp.version = OSCILLATE_VERSION_FULL;
     rsp.os_version = tools::get_os_version_string();
     m_payload_handler.get_stat_info(rsp.payload_info);
     return 1;

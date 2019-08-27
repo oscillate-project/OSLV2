@@ -39,8 +39,8 @@
 
 using namespace epee;
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "checkpoints"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "checkpoints"
 
 namespace cryptonote
 {
@@ -273,10 +273,10 @@ namespace cryptonote
 
     // All four ArQ-Net domains have DNSSEC on and valid
     static const std::vector<std::string> dns_urls = {
-        "checkpoints.arqma.com",
-        "checkpoints.myarqma.com",
-        "checkpoints.supportarqma.com",
-        "checkpoints.supportarqma.eu"
+        "checkpoints.oscillate.com",
+        "checkpoints.myoscillate.com",
+        "checkpoints.supportoscillate.com",
+        "checkpoints.supportoscillate.eu"
 	};
 
     static const std::vector<std::string> testnet_dns_urls = {

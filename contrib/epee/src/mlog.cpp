@@ -42,12 +42,12 @@
 #include "string_tools.h"
 #include "misc_log_ex.h"
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "logging"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "logging"
 
 #define MLOG_BASE_FORMAT "%datetime{%Y-%M-%d %H:%m:%s.%g}\t%thread\t%level\t%logger\t%loc\t%msg"
 
-#define MLOG_LOG(x) CINFO(el::base::Writer,el::base::DispatchAction::FileOnlyLog,ARQMA_DEFAULT_LOG_CATEGORY) << x
+#define MLOG_LOG(x) CINFO(el::base::Writer,el::base::DispatchAction::FileOnlyLog,OSCILLATE_DEFAULT_LOG_CATEGORY) << x
 
 using namespace epee;
 
@@ -154,7 +154,7 @@ void mlog_configure(const std::string &filename_base, bool console, const std::s
   el::Configurations c;
   c.setGlobally(el::ConfigurationType::Filename, filename_base);
   c.setGlobally(el::ConfigurationType::ToFile, "true");
-  const char *log_format = getenv("ARQMA_LOG_FORMAT");
+  const char *log_format = getenv("OSCILLATE_LOG_FORMAT");
   if (!log_format)
     log_format = MLOG_BASE_FORMAT;
   c.setGlobally(el::ConfigurationType::Format, log_format);
@@ -226,12 +226,12 @@ void mlog_configure(const std::string &filename_base, bool console, const std::s
     }
   });
   mlog_set_common_prefix();
-  const char *arqma_log = getenv("ARQMA_LOGS");
-  if (!arqma_log)
+  const char *oscillate_log = getenv("OSCILLATE_LOGS");
+  if (!oscillate_log)
   {
-    arqma_log = get_default_categories(0);
+    oscillate_log = get_default_categories(0);
   }
-  mlog_set_log(arqma_log);
+  mlog_set_log(oscillate_log);
 #ifdef WIN32
   EnableVTMode();
 #endif

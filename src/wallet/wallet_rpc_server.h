@@ -40,8 +40,8 @@
 #include "wallet_rpc_server_commands_defs.h"
 #include "wallet2.h"
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "wallet.rpc"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "wallet.rpc"
 
 namespace tools
 {

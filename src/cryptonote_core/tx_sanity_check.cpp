@@ -34,8 +34,8 @@
 #include "blockchain.h"
 #include "tx_sanity_check.h"
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "verify"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "verify"
 
 namespace cryptonote
 {

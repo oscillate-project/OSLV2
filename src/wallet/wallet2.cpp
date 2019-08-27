@@ -1,4 +1,4 @@
-// Copyright (c) 2018-2019, The Arqma Network
+// Copyright (c) 2018-2019, The Oscillate Network
 // Copyright (c) 2014-2018, The Monero Project
 //
 // All rights reserved.
@@ -91,8 +91,8 @@ using namespace std;
 using namespace crypto;
 using namespace cryptonote;
 
-#undef ARQMA_DEFAULT_LOG_CATEGORY
-#define ARQMA_DEFAULT_LOG_CATEGORY "wallet.wallet2"
+#undef OSCILLATE_DEFAULT_LOG_CATEGORY
+#define OSCILLATE_DEFAULT_LOG_CATEGORY "wallet.wallet2"
 
 // used to choose when to stop adding outputs to a tx
 #define APPROXIMATE_INPUT_BYTES 80
@@ -104,9 +104,9 @@ using namespace cryptonote;
 #define CHACHA8_KEY_TAIL 0x8c
 #define CACHE_KEY_TAIL 0x8d
 
-#define UNSIGNED_TX_PREFIX "ArQmA unsigned tx set\004"
-#define SIGNED_TX_PREFIX "ArQmA signed tx set\004"
-#define MULTISIG_UNSIGNED_TX_PREFIX "ArQmA multisig unsigned tx set\001"
+#define UNSIGNED_TX_PREFIX "Oscillate unsigned tx set\004"
+#define SIGNED_TX_PREFIX "Oscillate signed tx set\004"
+#define MULTISIG_UNSIGNED_TX_PREFIX "Oscillate multisig unsigned tx set\001"
 
 #define RECENT_OUTPUT_RATIO (0.50) // 50% of outputs are from the recent zone
 #define RECENT_OUTPUT_DAYS (1.8) // last 1.8 day makes up the recent zone
@@ -120,11 +120,11 @@ using namespace cryptonote;
 #define SUBADDRESS_LOOKAHEAD_MAJOR 50
 #define SUBADDRESS_LOOKAHEAD_MINOR 200
 
-#define KEY_IMAGE_EXPORT_FILE_MAGIC "ArQmA key image export\003"
+#define KEY_IMAGE_EXPORT_FILE_MAGIC "Oscillate key image export\003"
 
-#define MULTISIG_EXPORT_FILE_MAGIC "ArQmA multisig export\001"
+#define MULTISIG_EXPORT_FILE_MAGIC "Oscillate multisig export\001"
 
-#define OUTPUT_EXPORT_FILE_MAGIC "ArQmA output export\004"
+#define OUTPUT_EXPORT_FILE_MAGIC "Oscillate output export\004"
 
 #define SEGREGATION_FORK_HEIGHT 248200
 #define TESTNET_SEGREGATION_FORK_HEIGHT 9999999999999
@@ -144,7 +144,7 @@ namespace
   std::string get_default_ringdb_path()
   {
     boost::filesystem::path dir = tools::get_default_data_dir();
-    // remove .arqma, replace with .shared-ringdb
+    // remove .oscillate, replace with .shared-ringdb
     dir = dir.remove_filename();
     dir /= ".shared-ringdb";
     return dir.string();
@@ -272,7 +272,7 @@ struct options {
   const command_line::arg_descriptor<uint64_t> kdf_rounds = {"kdf-rounds", tools::wallet2::tr("Number of rounds for the key derivation function"), 1};
   const command_line::arg_descriptor<std::string> hw_device = {"hw-device", tools::wallet2::tr("HW device to use"), ""};
   const command_line::arg_descriptor<std::string> tx_notify = { "tx-notify" , "Run a program for each new incoming transaction, '%s' will be replaced by the transaction hash" , "" };
-  const command_line::arg_descriptor<bool> offline = {"offline", tools::wallet2::tr("Do not connect to Arqma Daemon, not use DNS"), false};
+  const command_line::arg_descriptor<bool> offline = {"offline", tools::wallet2::tr("Do not connect to Oscillate Daemon, not use DNS"), false};
 };
 
 void do_prepare_file_names(const std::string& file_path, std::string& keys_file, std::string& wallet_file)
@@ -964,12 +964,12 @@ gamma_picker::gamma_picker(const std::vector<uint64_t> &rct_offsets, double shap
     rct_offsets(rct_offsets)
 {
   gamma = std::gamma_distribution<double>(shape, scale);
-  THROW_WALLET_EXCEPTION_IF(rct_offsets.size() <= config::tx_settings::ARQMA_TX_CONFIRMATIONS_REQUIRED, error::wallet_internal_error, "Bad offset calculation");
+  THROW_WALLET_EXCEPTION_IF(rct_offsets.size() <= config::tx_settings::OSCILLATE_TX_CONFIRMATIONS_REQUIRED, error::wallet_internal_error, "Bad offset calculation");
   const size_t blocks_in_a_year = 86400 * 365 / DIFFICULTY_TARGET_V11;
   const size_t blocks_to_consider = std::min<size_t>(rct_offsets.size(), blocks_in_a_year);
   const size_t outputs_to_consider = rct_offsets.back() - (blocks_to_consider < rct_offsets.size() ? rct_offsets[rct_offsets.size() - blocks_to_consider - 1] : 0);
   begin = rct_offsets.data();
-  end = rct_offsets.data() + rct_offsets.size() - config::tx_settings::ARQMA_TX_CONFIRMATIONS_REQUIRED;
+  end = rct_offsets.data() + rct_offsets.size() - config::tx_settings::OSCILLATE_TX_CONFIRMATIONS_REQUIRED;
   num_rct_outputs = *(end - 1);
   THROW_WALLET_EXCEPTION_IF(num_rct_outputs == 0, error::wallet_internal_error, "No rct outputs");
   average_output_time = DIFFICULTY_TARGET_V11 * blocks_to_consider / outputs_to_consider; // this assumes constant target over the whole rct range
@@ -1292,7 +1292,7 @@ bool wallet2::get_multisig_seed(epee::wipeable_string& seed, const epee::wipeabl
   if (!passphrase.empty())
   {
     crypto::secret_key key;
-    crypto::cn_arqma_hash_v0(passphrase.data(), passphrase.size(), (crypto::hash&)key);
+    crypto::cn_oscillate_hash_v0(passphrase.data(), passphrase.size(), (crypto::hash&)key);
     sc_reduce32((unsigned char*)key.data);
     data = encrypt(data, key, true);
   }
@@ -1572,8 +1572,8 @@ void wallet2::scan_output(const cryptonote::transaction &tx, bool miner_tx, cons
     if (!m_encrypt_keys_after_refresh)
     {
       boost::optional<epee::wipeable_string> pwd = m_callback->on_get_password(pool ? "output found in pool" : "output received");
-      THROW_WALLET_EXCEPTION_IF(!pwd, error::password_needed, tr("Password is needed to compute key image for incoming Arqma"));
-      THROW_WALLET_EXCEPTION_IF(!verify_password(*pwd), error::password_needed, tr("Invalid password: password is needed to compute key image for incoming Arqma"));
+      THROW_WALLET_EXCEPTION_IF(!pwd, error::password_needed, tr("Password is needed to compute key image for incoming Oscillate"));
+      THROW_WALLET_EXCEPTION_IF(!verify_password(*pwd), error::password_needed, tr("Invalid password: password is needed to compute key image for incoming Oscillate"));
       decrypt_keys(*pwd);
       m_encrypt_keys_after_refresh = *pwd;
     }
@@ -5486,7 +5486,7 @@ bool wallet2::is_transfer_unlocked(uint64_t unlock_time, uint64_t block_height) 
   if(!is_tx_spendtime_unlocked(unlock_time, block_height))
     return false;
 
-  if(block_height + config::tx_settings::ARQMA_TX_CONFIRMATIONS_REQUIRED > get_blockchain_current_height())
+  if(block_height + config::tx_settings::OSCILLATE_TX_CONFIRMATIONS_REQUIRED > get_blockchain_current_height())
     return false;
 
   return true;
@@ -7109,7 +7109,7 @@ void wallet2::get_outs(std::vector<std::vector<tools::wallet2::get_outs_entry>> 
     if (has_rct_distribution)
     {
       // check we're clear enough of rct start, to avoid corner cases below
-      THROW_WALLET_EXCEPTION_IF(rct_offsets.size() <= config::tx_settings::ARQMA_TX_CONFIRMATIONS_REQUIRED,
+      THROW_WALLET_EXCEPTION_IF(rct_offsets.size() <= config::tx_settings::OSCILLATE_TX_CONFIRMATIONS_REQUIRED,
           error::get_output_distribution, "Not enough rct outputs");
       THROW_WALLET_EXCEPTION_IF(rct_offsets.back() <= max_rct_index,
           error::get_output_distribution, "Daemon reports suspicious number of rct outputs");
@@ -7212,7 +7212,7 @@ void wallet2::get_outs(std::vector<std::vector<tools::wallet2::get_outs_entry>> 
       const uint64_t amount = td.is_rct() ? 0 : td.amount();
       std::unordered_set<uint64_t> seen_indices;
       // request more for rct in base recent (locked) coinbases are picked, since they're locked for longer
-      size_t requested_outputs_count = base_requested_outputs_count + (td.is_rct() ? config::blockchain_settings::ARQMA_BLOCK_UNLOCK_CONFIRMATIONS - config::tx_settings::ARQMA_TX_CONFIRMATIONS_REQUIRED : 0);
+      size_t requested_outputs_count = base_requested_outputs_count + (td.is_rct() ? config::blockchain_settings::OSCILLATE_BLOCK_UNLOCK_CONFIRMATIONS - config::tx_settings::OSCILLATE_TX_CONFIRMATIONS_REQUIRED : 0);
       size_t start = req.outputs.size();
       bool use_histogram = amount != 0 || !has_rct_distribution;
 
@@ -7281,7 +7281,7 @@ void wallet2::get_outs(std::vector<std::vector<tools::wallet2::get_outs_entry>> 
       else
       {
         // the base offset of the first rct output in the first unlocked block (or the one to be if there's none)
-        num_outs = rct_offsets[rct_offsets.size() - config::tx_settings::ARQMA_TX_CONFIRMATIONS_REQUIRED];
+        num_outs = rct_offsets[rct_offsets.size() - config::tx_settings::OSCILLATE_TX_CONFIRMATIONS_REQUIRED];
         LOG_PRINT_L1("" << num_outs << " unlocked rct outputs");
         THROW_WALLET_EXCEPTION_IF(num_outs == 0, error::wallet_internal_error,
             "histogram reports no unlocked rct outputs, not even ours");
@@ -7496,7 +7496,7 @@ void wallet2::get_outs(std::vector<std::vector<tools::wallet2::get_outs_entry>> 
           [](const get_outputs_out &a, const get_outputs_out &b) { return a.index < b.index; });
     }
 
-    if (ELPP->vRegistry()->allowed(el::Level::Debug, ARQMA_DEFAULT_LOG_CATEGORY))
+    if (ELPP->vRegistry()->allowed(el::Level::Debug, OSCILLATE_DEFAULT_LOG_CATEGORY))
     {
       std::map<uint64_t, std::set<uint64_t>> outs;
       for (const auto &i: req.outputs)
@@ -7527,7 +7527,7 @@ void wallet2::get_outs(std::vector<std::vector<tools::wallet2::get_outs_entry>> 
     for(size_t idx: selected_transfers)
     {
       const transfer_details &td = m_transfers[idx];
-      size_t requested_outputs_count = base_requested_outputs_count + (td.is_rct() ? config::blockchain_settings::ARQMA_BLOCK_UNLOCK_CONFIRMATIONS - config::tx_settings::ARQMA_TX_CONFIRMATIONS_REQUIRED : 0);
+      size_t requested_outputs_count = base_requested_outputs_count + (td.is_rct() ? config::blockchain_settings::OSCILLATE_BLOCK_UNLOCK_CONFIRMATIONS - config::tx_settings::OSCILLATE_TX_CONFIRMATIONS_REQUIRED : 0);
       outs.push_back(std::vector<get_outs_entry>());
       outs.back().reserve(fake_outputs_count + 1);
       const rct::key mask = td.is_rct() ? rct::commit(td.amount(), td.m_mask) : rct::zeroCommit(td.amount());
@@ -12085,7 +12085,7 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
     }
   }
 
-  std::string uri = "arqma:" + address;
+  std::string uri = "oscillate:" + address;
   unsigned int n_fields = 0;
 
   if (!payment_id.empty())
@@ -12114,16 +12114,16 @@ std::string wallet2::make_uri(const std::string &address, const std::string &pay
 //----------------------------------------------------------------------------------------------------
 bool wallet2::parse_uri(const std::string &uri, std::string &address, std::string &payment_id, uint64_t &amount, std::string &tx_description, std::string &recipient_name, std::vector<std::string> &unknown_parameters, std::string &error)
 {
-  static const std::string ARQMA_URI = "arqma:";
-  static const int ARQMA_URI_LEN = ARQMA_URI.length();
+  static const std::string OSCILLATE_URI = "oscillate:";
+  static const int OSCILLATE_URI_LEN = OSCILLATE_URI.length();
 
-  if (uri.substr(0, ARQMA_URI_LEN) != ARQMA_URI)
+  if (uri.substr(0, OSCILLATE_URI_LEN) != OSCILLATE_URI)
   {
-    error = std::string("URI has wrong scheme (expected ") + "\"" + ARQMA_URI + "\"): " + uri;
+    error = std::string("URI has wrong scheme (expected ") + "\"" + OSCILLATE_URI + "\"): " + uri;
     return false;
   }
 
-  std::string remainder = uri.substr(ARQMA_URI_LEN);
+  std::string remainder = uri.substr(OSCILLATE_URI_LEN);
   const char *ptr = strchr(remainder.c_str(), '?');
   address = ptr ? remainder.substr(0, ptr-remainder.c_str()) : remainder;
 
