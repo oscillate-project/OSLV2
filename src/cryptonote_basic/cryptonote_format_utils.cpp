@@ -938,13 +938,13 @@ namespace cryptonote
     switch (std::atomic_load(&default_decimal_point))
     {
       case 9:
-        return "arq";
+        return "osc";
       case 6:
-        return "milliarq";
+        return "milliosc";
       case 3:
-        return "microarq";
+        return "microosc";
       case 0:
-        return "nanoarq";
+        return "nanoosc";
       default:
         ASSERT_MES_AND_THROW("Invalid decimal point specification: " << default_decimal_point);
     }
