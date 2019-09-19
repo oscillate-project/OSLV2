@@ -179,9 +179,9 @@ namespace config
    uint64_t const BASE_REWARD_CLAMP_THRESHOLD = ((uint64_t)100000);
    std::string const P2P_REMOTE_DEBUG_TRUSTED_PUB_KEY = "0000000000000000000000000000000000000000000000000000000000000000";
 
-   uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0x4fc9; // Wallet prefix: ai... 
-   uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x4c49; // Wallet prefix: aii... // decimal prefix: 1141703
-   uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0x1742ca; // Wallet prefix: asi... 
+   uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0xbc540e9d3; // Wallet prefix: cRypto 
+   uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x3154e6; // Wallet prefix: fair
+   uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0xda1085388; // Wallet prefix: Privacy 
    uint16_t const P2P_DEFAULT_PORT = 11245;
    uint16_t const RPC_DEFAULT_PORT = 11246;
    uint16_t const ZMQ_RPC_DEFAULT_PORT = 11115;
