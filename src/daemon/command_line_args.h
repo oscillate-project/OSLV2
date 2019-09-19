@@ -53,6 +53,11 @@ namespace daemon_args
       return val;
     }
   };
+  const command_line::arg_descriptor<unsigned> arg_make_genesis_tx = {
+    "make-genesis-tx"
+    , "Makes a new genesis transaction (useful for making a new coin based off of this project)\n1 for Mainnet, 2 for Testnet, 3 for Stagenet"
+      , 0
+  };
   const command_line::arg_descriptor<std::string, false, true, 2> arg_log_file = {
     "log-file"
   , "Specify log file"
