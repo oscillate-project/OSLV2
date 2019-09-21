@@ -228,9 +228,9 @@ Tested on a Raspberry Pi Zero with a clean install of minimal Raspbian Stretch (
 ```
 * Wait 4-6 hours
 
-* The resulting executables can be found in `build/release/bin`
+* The resulting executables can be found in `/build/Linux/master/release/binn`
 
-* Add `PATH="$PATH:$HOME/oscillate/build/release/bin"` to `.profile`
+* Add `PATH="$PATH:$HOME/oscillate/build/Linux/master/release/bin"` to `.profile`
 
 * Run Oscillate with `oscillated --detach`
 
