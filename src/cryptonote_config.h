@@ -206,12 +206,12 @@ namespace config
 
    namespace stagenet
    {
-     uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0x39ca; // Wallet prefix: as...
-     uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x1742ca; // Wallet prefix: asi... 
-     uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0x1d84ca; // Wallet prefix: ass... 
-     uint16_t const P2P_DEFAULT_PORT = 31245;
-     uint16_t const RPC_DEFAULT_PORT = 31246;
-     uint16_t const ZMQ_RPC_DEFAULT_PORT = 33335;
+     uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0xbc540e9d3; // Wallet prefix: cRypto
+     uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x3154e6; // Wallet prefix: fair
+     uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0xda1085388; // Wallet prefix: Privacy
+     uint16_t const P2P_DEFAULT_PORT = 11245;
+     uint16_t const RPC_DEFAULT_PORT = 11246;
+     uint16_t const ZMQ_RPC_DEFAULT_PORT = 11115;
      boost::uuids::uuid const NETWORK_ID = { {
          0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1C, 0x11, 0xFF, 0xFF, 0xFF
        } }; // 
