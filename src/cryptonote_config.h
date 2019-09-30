@@ -168,9 +168,13 @@
 
 #define RPC_CREDITS_PER_HASH_SCALE                      ((float)(1<<24))
 
+
+
 static constexpr uint64_t POISSON_CHECK_TRIGGER = 5;  // Reorg size that triggers poisson timestamp check
 static constexpr uint64_t POISSON_CHECK_DEPTH = 128;  // Main-chain depth of the poisson check. The attacker will have to tamper 50% of those blocks
 static constexpr double POISSON_LOG_P_REJECT = -75.0; // Reject reorg if the probablity that the timestamps are genuine is below e^x, -75 = 10^-33
+
+
 
 // New constants are intended to go here
 namespace config
@@ -179,9 +183,9 @@ namespace config
    uint64_t const BASE_REWARD_CLAMP_THRESHOLD = ((uint64_t)100000);
    std::string const P2P_REMOTE_DEBUG_TRUSTED_PUB_KEY = "0000000000000000000000000000000000000000000000000000000000000000";
 
-   uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0xbc540e9d3; // Wallet prefix: cRypto 
-   uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x3154e6; // Wallet prefix: fair
-   uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0xda1085388; // Wallet prefix: Privacy 
+   uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0x3697; // Wallet prefix: SL
+   uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x101072; // Wallet prefix: han
+   uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0x4097; // Wallet prefix: SLn
    uint16_t const P2P_DEFAULT_PORT = 11245;
    uint16_t const RPC_DEFAULT_PORT = 11246;
    uint16_t const ZMQ_RPC_DEFAULT_PORT = 11115;
@@ -190,6 +194,8 @@ namespace config
      } }; // 
    std::string const GENESIS_TX = "011201ff00011e026bc5c7db8a664f652d78adb587ac4d759c6757258b64ef9cba3c0354e64fb2e42101abca6a39c561d0897be183eb0143990eba201aa7d2c652ab0555d28bb4b70728";
    uint32_t const GENESIS_NONCE = 19993;
+
+
 
    namespace testnet
    {
@@ -204,11 +210,13 @@ namespace config
        } }; // 
    }
 
+
+
    namespace stagenet
    {
-     uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0xbc540e9d3; // Wallet prefix: cRypto
-     uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x3154e6; // Wallet prefix: fair
-     uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0xda1085388; // Wallet prefix: Privacy
+     uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0x3697; // Wallet prefix: SL
+     uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 0x101072; // Wallet prefix: han
+     uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 0x4097; // Wallet prefix: SLn
      uint16_t const P2P_DEFAULT_PORT = 11245;
      uint16_t const RPC_DEFAULT_PORT = 11246;
      uint16_t const ZMQ_RPC_DEFAULT_PORT = 11115;
@@ -216,6 +224,8 @@ namespace config
          0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1C, 0x11, 0xFF, 0xFF, 0xFF
        } }; // 
    }
+
+
 
    namespace blockchain_settings
    {
@@ -226,6 +236,8 @@ namespace config
      static constexpr uint8_t OSCILLATE_BLOCK_UNLOCK_CONFIRMATIONS = 18; // How many blocks mined are needed to unlock block_reward.
    }
 
+
+
    namespace tx_settings
    {
      static constexpr uint8_t OSCILLATE_TX_CONFIRMATIONS_REQUIRED = 4; // How many blocks are needed to confirm transaction sent.
@@ -233,13 +245,17 @@ namespace config
      static constexpr uint64_t TRANSACTION_SIZE_LIMIT = 48 * 1024; // I did set it to 48kB for now but it need to be verified.
      static constexpr uint64_t MAX_TRANSACTIONS_IN_BLOCK = 1024; // Maximum allowed transactions in One Block
    }
-   
+
+
+
    namespace sync
    {
      static constexpr size_t NORMAL_SYNC = 20; // Amount of Blocks to download and Validate at ones while Synchronizung with Arqma Network.
      static constexpr size_t RAPID_SYNC = 250; // Amount of Blocks to download at ones from already known by Oscillate Daemon and Checkpoint are hardcoded into codebase
    }
 }
+
+
 
 namespace cryptonote
 {
