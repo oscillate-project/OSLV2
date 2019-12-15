@@ -51,7 +51,7 @@
 
 // MONEY_SUPPLY - total number coins to be generated
 #define MONEY_SUPPLY                                    ((uint64_t)100000000000000ULL)
-#define MONEY_PREMINE                                   ((uint64_t)32000000000000)
+#define MONEY_PREMINE                                   ((uint64_t)46561165950000)
 #define EMISSION_SPEED_FACTOR_PER_MINUTE                (23)
 #define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)3000)
 
