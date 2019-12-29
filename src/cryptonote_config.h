@@ -51,7 +51,7 @@
 
 // MONEY_SUPPLY - total number coins to be generated
 #define MONEY_SUPPLY                                    ((uint64_t)100000000000000ULL)
-#define MONEY_PREMINE                                   ((uint64_t)46561165950000)
+#define MONEY_PREMINE                                   ((uint64_t)4656116595000)
 #define EMISSION_SPEED_FACTOR_PER_MINUTE                (23)
 #define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)3000)
 
@@ -221,7 +221,7 @@ namespace config
      uint16_t const RPC_DEFAULT_PORT = 31246;
      uint16_t const ZMQ_RPC_DEFAULT_PORT = 33335;
      boost::uuids::uuid const NETWORK_ID = { {
-         0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1C, 0x11, 0xFF, 0xFF, 0xFF
+         0x12, 0x11, 0x11, 0x11, 0x11, 0x11, 0xFF, 0xFF, 0xFF, 0x11, 0x11, 0x1C, 0x11, 0xFF, 0xFF, 0xFF
        } }; // 
    }
 
